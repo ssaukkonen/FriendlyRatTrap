@@ -20,7 +20,8 @@ def captureImage():
     camera.framerate = 3
     camera.start_preview()
     sleep(2)
-    camera.capture('image.jpg')
+    camera.capture('image1.jpg')
     
 camera = PiCamera()
 captureImage()
+#numpyCamera()
