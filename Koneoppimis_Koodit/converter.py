@@ -11,11 +11,10 @@ from tensorflow.keras.layers import Flatten
 from tensorflow.keras.layers import Dropout
 import matplotlib.pyplot as plt
 
-old_model = tf.keras.models.load_model('Model\my_model.h5')
+old_model = tf.keras.models.load_model('Model\my_model_rgb.h5')
 #new_model.summary()
-
 
 converter = tf.lite.TFLiteConverter.from_keras_model(old_model)
 tflite_model = converter.convert()
-with open('Model\model.tflite', 'wb') as f:
+with open('Model\model.tflite_rgb_100e', 'wb') as f:
   f.write(tflite_model)

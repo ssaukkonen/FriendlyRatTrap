@@ -1,4 +1,3 @@
-import tensorflow
 import numpy as np
 import tensorflow as tf
 from numpy import asarray
@@ -26,14 +25,14 @@ nValidation = (int)(split*nPictures)
 training_data = tf.keras.preprocessing.image_dataset_from_directory(
 directory,                # juurihakemisto, jonka alta löytyy kunkin dataluokan omat hakemistot
 batch_size=(nTraining),     # data jaetaan tämän kokoisin batcheihin.
-color_mode="grayscale",
+color_mode="rgb",
 shuffle=True,
 seed=1,
 validation_split = split, # tämän arvo = 0.2
 subset = 'training',      # tämä kertoo, että tällä kertaa datasta otetaan 80% eli yksi batch
 image_size=(320, 240)
 )
-x_train = np.zeros((nTraining,320,240,1))
+x_train = np.zeros((nTraining,320,240,3))
 y_train = np.zeros(nTraining)
 for image, label in training_data:
     for i in range(nTraining):
@@ -43,7 +42,7 @@ for image, label in training_data:
 validation_data = tf.keras.preprocessing.image_dataset_from_directory(
 directory,                # juurihakemisto, jonka alta löytyy kunkin dataluokan omat hakemistot
 batch_size=nValidation,     # data jaetaan tämän kokoisin batcheihin.
-color_mode="grayscale",
+color_mode="rgb",
 shuffle=True,
 seed=2,
 validation_split = split, # tämän arvo = 0.2                                                   
@@ -51,7 +50,7 @@ subset = 'validation',      # tämä kertoo, että tällä kertaa datasta otetaa
 image_size=(320, 240)
 )
 
-x_test = np.zeros((nValidation,320,240,1))
+x_test = np.zeros((nValidation,320,240,3))
 y_test = np.zeros(nValidation)
 for image, label in validation_data:
     for i in range(nValidation):
@@ -97,7 +96,7 @@ model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=
 # 5 step process step 3: Fit the model = train model
 #######################################
 
-model.fit(x_train, y_train, epochs=20, batch_size=10, verbose=2)
+model.fit(x_train, y_train, epochs=100, batch_size=10, verbose=2)
 #######################################
 # 5 step process step 4: Evaluate the model
 #######################################
@@ -108,15 +107,16 @@ print('Accuracy: %.3f' % acc)
 # 5 step process: Make a prediction
 #######################################
 #model.save('Model/my_model1') #Perusformatti
-model.save('Model\my_model.h5') #HDF5 Formatti
+#model.save('Model\my_model_rgb.h5') #HDF5 Formatti
 
 
-for i in range(10):
+for i in range(20):
   plt.figure(1)
   image = x_test[i]
   yhat = model.predict(asarray([image]))
   print((y_test[i]+1))
   print('Predicted: class=%d' % (argmax(yhat)+1))
   plt.imshow(image[:,:,0])
-  plt.show()
+  #plt.show()
+  
 print(model.summary())
