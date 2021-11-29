@@ -15,7 +15,7 @@ floating_model = input_details[0]['dtype'] == np.float32
 input_shape = input_details[0]['shape']
 height = input_details[0]['shape'][1]
 width = input_details[0]['shape'][2]
-img = Image.open('Testikuvat/nettikuva3.jpg').resize((width, height))
+img = Image.open('Testikuvat/nettikuva1.jpg').resize((width, height))
 print(img)
 input_data = np.expand_dims(img, axis=0)
 print(np.shape(input_data))
@@ -33,3 +33,8 @@ results=np.squeeze(output_data)
 print(results)
 top_k = results.argsort()[-5:][::-1]
 print(top_k)
+
+if top_k[0]==0:
+    print("se on hiiri")
+if top_k[1]==0:
+    print("joku muu kuin hiiri")    
