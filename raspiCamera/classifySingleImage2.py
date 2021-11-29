@@ -1,8 +1,16 @@
+from tflite_runtime.interpreter import Interpreter
+from PIL import Image
+import numpy as np
+import time
+
+
+tflite_model_file = 'Model/model.tflite'
+
 # Load TFLite model and allocate tensors.
 with open(tflite_model_file, 'rb') as fid:
     tflite_model = fid.read()
     
-interpreter = tf.lite.Interpreter(model_content=tflite_model)
+interpreter = Interpreter(model_content=tflite_model)
 interpreter.allocate_tensors()
 
 input_index = interpreter.get_input_details()[0]["index"]

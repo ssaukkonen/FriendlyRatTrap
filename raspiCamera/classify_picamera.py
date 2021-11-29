@@ -60,14 +60,14 @@ def main():
   parser = argparse.ArgumentParser(
       formatter_class=argparse.ArgumentDefaultsHelpFormatter)
   parser.add_argument(
-      '--model', help='File path of .tflite file.', required=True)
+      '--model', help='File path of .tflite file.', required=False)
   parser.add_argument(
-      '--labels', help='File path of labels file.', required=True)
+      '--labels', help='File path of labels file.', required=False)
   args = parser.parse_args()
 
-  labels = load_labels(args.labels)
+  #labels = load_labels(args.labels)
 
-  interpreter = Interpreter(args.model)
+  interpreter = Interpreter('Model/model_1.tflite')
   interpreter.allocate_tensors()
   _, height, width, _ = interpreter.get_input_details()[0]['shape']
 
@@ -86,7 +86,7 @@ def main():
         label_id, prob = results[0]
         stream.seek(0)
         stream.truncate()
-        camera.annotate_text = '%s %.2f\n%.1fms' % (labels[label_id], prob,
+        camera.annotate_text = '%s %.2f\n%.1fms' % (label_id, prob,
                                                     elapsed_ms)
     finally:
       camera.stop_preview()
