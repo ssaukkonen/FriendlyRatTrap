@@ -28,11 +28,11 @@ interpreter.invoke()
 # The function `get_tensor()` returns a copy of the tensor data.
 # Use `tensor()` in order to get a pointer to the tensor.
 output_data = interpreter.get_tensor(output_details[0]['index'])
-print(output_data[0][0])
+print(output_data[0])
 results=np.squeeze(output_data)
-print(results)
+#print(results)
 top_k = results.argsort()[-5:][::-1]
-print(top_k)
+#print(top_k)
 
 if top_k[0]==0:
     print("se on hiiri")
