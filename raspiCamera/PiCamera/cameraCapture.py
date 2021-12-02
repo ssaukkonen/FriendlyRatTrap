@@ -39,6 +39,7 @@ class CameraCapture:
             finally:
                 camera.stop_preview()
     def get_image_ready_for_sending(self, image):
-        byte_io = io.BytesIO
-        image.save(byte_io, 'jpg')
-        return byte_io.seek(0)
+        byte_io = io.BytesIO()
+        image.save(byte_io, 'JPEG')
+        byte_io.seek(0)
+        return byte_io

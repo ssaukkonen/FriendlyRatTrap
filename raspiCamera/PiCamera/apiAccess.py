@@ -1,4 +1,5 @@
 import requests
+import time
 
 
 class APIAccess:
@@ -6,5 +7,7 @@ class APIAccess:
         self.url = 'http://172.20.241.184/'
 
     def send_data_to_server(self, file):
-        requests.post(self.url + 'img/', files=file)
-        requests.post(self.url + 'db/', files='1')
+        #requests.post(self.url + 'img/', files=file)
+        #requests.post(self.url + 'db/', files='1')
+        print('sending')
+        time.sleep(5)
