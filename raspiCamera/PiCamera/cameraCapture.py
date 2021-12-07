@@ -24,22 +24,24 @@ class CameraCapture:
                     stream.seek(0)
                     image = Image.open(stream).convert('RGB').resize((self.classifyImageObject.width, self.classifyImageObject.height),
                                                                     Image.ANTIALIAS)
-                    start_time = time.time()
+                    image2 = Image.open(stream).convert('RGB')
+                    #start_time = time.time()
                     results = self.classifyImageObject.classify_image(image)
-                    elapsed_ms = (time.time() - start_time) * 1000
+                    #elapsed_ms = (time.time() - start_time) * 1000
                     label_id, prob = results[0]
                     stream.seek(0)
                     stream.truncate()
-                    camera.annotate_text = '%s %.2f\n%.1fms' % (label_id, prob,
-                                                                elapsed_ms)
+                    #camera.annotate_text = '%s %.2f\n%.1fms' % (label_id, prob,
+                    #                                            elapsed_ms)
                     if label_id == 0 and prob > 0.6:
-                        return self.get_image_ready_for_sending(image)
+                        print('Detected and picture taken')
+                        return self.get_image_ready_for_sending(image2)
                     if time.time() - timer_for_capture > 10:
                         return 0
             finally:
                 camera.stop_preview()
     def get_image_ready_for_sending(self, image):
-        byte_io = io.BytesIO()
-        image.save(byte_io, 'JPEG')
-        byte_io.seek(0)
-        return byte_io
+        output = io.BytesIO()
+        image.save(output, format='JPEG')
+        #output.seek(0)
+        return output.getvalue()
