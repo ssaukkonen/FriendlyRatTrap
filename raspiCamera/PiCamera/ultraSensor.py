@@ -3,8 +3,12 @@ import time
 
 class UltraSensor: 
     def __init__(self):
+        pass
+    
+    def set_GPIO(self):
         #GPIO Mode (BOARD / BCM)
         GPIO.setmode(GPIO.BCM)
+        GPIO.setwarnings(False)
         
         #set GPIO Pins
         self.GPIO_TRIGGER = 18
@@ -13,8 +17,9 @@ class UltraSensor:
         #set GPIO direction (IN / OUT)
         GPIO.setup(self.GPIO_TRIGGER, GPIO.OUT)
         GPIO.setup(self.GPIO_ECHO, GPIO.IN)
-    
+        
     def distance(self):
+        self.set_GPIO()
         try:
             while True:
                 # set Trigger to HIGH
@@ -41,8 +46,12 @@ class UltraSensor:
                 # and divide by 2, because there and back
                 distance = (TimeElapsed * 34300) / 2
 
-                if distance < 50:
+                if distance < 30:
+                    print(distance)
                     return True
         finally:
             GPIO.cleanup()
  
+# sens = UltraSensor()
+# result = sens.distance()
+# print(result)

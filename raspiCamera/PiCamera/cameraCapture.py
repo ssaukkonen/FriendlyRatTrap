@@ -43,5 +43,4 @@ class CameraCapture:
     def get_image_ready_for_sending(self, image):
         output = io.BytesIO()
         image.save(output, format='JPEG')
-        #output.seek(0)
         return output.getvalue()
