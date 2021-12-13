@@ -1,48 +1,66 @@
 <html>
-<html lang="Fi">
 <head>
 <style>
-body {
-background-color: linen;
+body
+{
+background-color:FFFFFF;
 }
-.button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
+#submit {
+  font-family: "Verdana";
+  background-color: FFFFFF;
+  border: 2px solid black;
+  white-space: normal;
+  width: 240px;
+  color: black;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
+  font-size: 24px;
+}
+tyyli
+{
+  font-family: "Verdana"; 
+  font-size: 64px;
+  font-weight:normal
+}
+tyyli2
+{
+  color: #FF3300;
+  font-family: "Verdana"; 
   font-size: 40px;
-}
-.button1 {background-color: #4CAF50;}
-.button1:hover {background-color:white;
-color:black;
-border: 2px solid #008CBA;
-}
-h1 {
-color: blue;  
-text-align: center; 
-font-size: 85px;
-}
-h2 {color: red; text-align: center; font-size:60px;}
+  font-weight:normal
 
+}
 </style>
-
-<title>ROTTA DESTROYER 6000</title>
+<title>
+Rotta Destroyer
+</title>
 </head>
-<body>
-<h1>ROTTA DESTROYER 6000</h1>
-<p style="text-align:center; font-size:40px">Helppoa huoletonta ja automatisoitua</p>
+<body onLoad="playSound('https://www.myinstants.com/media/sounds/tindeck_1.mp3');">
+<table style="width:95%; height:100%">
+<tr>
+
+<th bgcolor="FFFFFF" style="width:50%;">
+<tyyli>Your friendly <br> rat trapper<br></tyyli>
 <br>
-<h2>ROTTIEN MURHAAMISTA!!!!</h2>
+<tyyli2>There is a visitor<br>in your trap<br></tyyli2>
 <br>
-<img src="https://c.tenor.com/W3KLgvuCW_IAAAAi/rat-in-hochorao-mouse-cry.gif" alt="rotta"><img src="https://c.tenor.com/W3KLgvuCW_IAAAAi/rat-in-hochorao-mouse-cry.gif" alt="rotta"><img src="https://c.tenor.com/W3KLgvuCW_IAAAAi/rat-in-hochorao-mouse-cry.gif" alt="rotta"><img src="https://c.tenor.com/W3KLgvuCW_IAAAAi/rat-in-hochorao-mouse-cry.gif" alt="rotta"><img src="https://c.tenor.com/W3KLgvuCW_IAAAAi/rat-in-hochorao-mouse-cry.gif" alt="rotta">
-<form method="POST" action="/click/">
-    <center>
-<input type = "submit">
- </center>
-<img src="{{rotta_image}}" alt="Rotta Image">
+<form method="POST" action="/r/">
+<input type = "submit" value = "Reset trap" id="submit">
 </form>
+</th>
+
+<th bgcolor="#FF3300">
+<img src="{{rotta_image}}" alt="Rotta" style="width:80%;">
+</th>
+
+</tr>
 </body>
+<script>
+function playSound(url) {
+  const audio = new Audio(url);
+  audio.play();
+}
+</script>
 </html>
