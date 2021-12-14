@@ -3,8 +3,6 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
-
-#from PIL import Image
 from tflite_runtime.interpreter import Interpreter
 
 class ClassifyImage:
