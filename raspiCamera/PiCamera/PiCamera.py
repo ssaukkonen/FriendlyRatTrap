@@ -17,16 +17,15 @@ class RunUltraAndCamera:
         trapActive = False
         while True:
             if trapActive is True:
+                print('Trap is active')
                 trapActive = self.runSensors()
             else:
-                print('trapActive is false')
+                print("Trap isn't active")
                 trapActive = self.APIAccessObject.get_trapActive_status()
-                #break
     
     def runSensors(self):
         while True:
             ultraSensorResult = self.UltraSensorObject.distance()
-            #ultraSensorResult = True
             if ultraSensorResult is True:
                 result = self.cameraCaptureObject.captureContinuously()
                 if result != 0:

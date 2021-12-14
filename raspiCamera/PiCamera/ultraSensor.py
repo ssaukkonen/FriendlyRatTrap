@@ -47,11 +47,8 @@ class UltraSensor:
                 distance = (TimeElapsed * 34300) / 2
 
                 if distance < 30:
-                    print(distance)
+                    print('Object detected by ultrasonic sensor')
                     return True
         finally:
             GPIO.cleanup()
  
-# sens = UltraSensor()
-# result = sens.distance()
-# print(result)

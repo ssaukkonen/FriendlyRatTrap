@@ -1,4 +1,3 @@
-
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -25,21 +24,18 @@ class CameraCapture:
                     image = Image.open(stream).convert('RGB').resize((self.classifyImageObject.width, self.classifyImageObject.height),
                                                                     Image.ANTIALIAS)
                     image2 = Image.open(stream).convert('RGB')
-                    #start_time = time.time()
                     results = self.classifyImageObject.classify_image(image)
-                    #elapsed_ms = (time.time() - start_time) * 1000
                     label_id, prob = results[0]
                     stream.seek(0)
                     stream.truncate()
-                    #camera.annotate_text = '%s %.2f\n%.1fms' % (label_id, prob,
-                    #                                            elapsed_ms)
                     if label_id == 0 and prob > 0.6:
-                        print('Detected and picture taken')
+                        print('Rat detected and picture taken')
                         return self.get_image_ready_for_sending(image2)
                     if time.time() - timer_for_capture > 10:
                         return 0
             finally:
                 camera.stop_preview()
+                
     def get_image_ready_for_sending(self, image):
         output = io.BytesIO()
         image.save(output, format='JPEG')
